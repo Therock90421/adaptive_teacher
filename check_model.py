@@ -16,6 +16,7 @@ a = torch.load('City2Fog.pth')
 print('####################')
 for key in a['model'].keys():
     print(key)
+print(a['iteration'])
 #print(torch.equal(a['state_dict']['DAPromptHead.prompt_learner.ctx_di'],b['state_dict']['DAPromptHead.prompt_learner.ctx_di']))
 #print(torch.equal(a['state_dict']['DAPromptHead.prompt_learner.token_prefix'],b['state_dict']['DAPromptHead.prompt_learner.token_prefix']))
 #print(torch.equal(a['state_dict']['DAPromptHead.text_encoder.transformer.resblocks.1.mlp.c_fc.weight'],b['state_dict']['DAPromptHead.text_encoder.transformer.resblocks.1.mlp.c_fc.weight']))

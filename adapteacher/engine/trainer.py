@@ -93,6 +93,8 @@ class BaselineTrainer(DefaultTrainer):
         )
         if resume and self.checkpointer.has_checkpoint():
             self.start_iter = checkpoint.get("iteration", -1) + 1
+            print(self.start_iter)
+            quit()
             # The checkpoint stores the training iteration that just finished, thus we start
             # at the next iteration (or iter zero if there's no checkpoint).
         if isinstance(self.model, DistributedDataParallel):
@@ -315,7 +317,7 @@ class ATeacherTrainer(DefaultTrainer):
             optimizer=optimizer,
             scheduler=self.scheduler,
         )
-        self.start_iter = 0
+        self.start_iter = 15000 #0
         self.max_iter = cfg.SOLVER.MAX_ITER
         self.cfg = cfg
 
@@ -334,11 +336,14 @@ class ATeacherTrainer(DefaultTrainer):
         Args:
             resume (bool): whether to do resume or not
         """
+
         checkpoint = self.checkpointer.resume_or_load(
             self.cfg.MODEL.WEIGHTS, resume=resume
         )
         if resume and self.checkpointer.has_checkpoint():
             self.start_iter = checkpoint.get("iteration", -1) + 1
+            print(self.start_iter)
+            quit()
             # The checkpoint stores the training iteration that just finished, thus we start
             # at the next iteration (or iter zero if there's no checkpoint).
         if isinstance(self.model, DistributedDataParallel):
