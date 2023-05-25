@@ -71,7 +71,6 @@ class DetectionTSCheckpointer(DetectionCheckpointer):
         # DataParallel or DistributedDataParallel during serialization,
         # remove the "module" prefix before performing the matching.
         _strip_prefix_if_present(checkpoint_state_dict, "module.")
-
         # work around https://github.com/pytorch/pytorch/issues/24139
         model_state_dict = self.model.modelStudent.state_dict()
         incorrect_shapes = []

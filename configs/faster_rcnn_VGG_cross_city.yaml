@@ -27,17 +27,17 @@ SOLVER:
   STEPS: (60000, 80000, 90000, 360000)
   FACTOR_LIST: (1, 1, 1, 1, 1)
   MAX_ITER: 100000
-  IMG_PER_BATCH_LABEL: 16
-  IMG_PER_BATCH_UNLABEL: 16
+  IMG_PER_BATCH_LABEL: 4 #16
+  IMG_PER_BATCH_UNLABEL: 4 #16
   BASE_LR: 0.04
 DATALOADER:
   SUP_PERCENT: 100.0
 DATASETS:
 DATASETS:
   CROSS_DATASET: True
-  TRAIN_LABEL: ("cityscapes_fine_instance_seg_train",)
-  TRAIN_UNLABEL: ("cityscapes_foggy_train",)
-  TEST: ("cityscapes_foggy_val",)
+  TRAIN_LABEL: ("cityscapes_voc_trainval",)
+  TRAIN_UNLABEL: ("foggy_cityscapes_voc_trainval",)
+  TEST: ("foggy_cityscapes_voc_test",)
 SEMISUPNET:
   Trainer: "ateacher"
   BBOX_THRESHOLD: 0.8
