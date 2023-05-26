@@ -342,8 +342,6 @@ class ATeacherTrainer(DefaultTrainer):
         )
         if resume and self.checkpointer.has_checkpoint():
             self.start_iter = checkpoint.get("iteration", -1) + 1
-            print(self.start_iter)
-            quit()
             # The checkpoint stores the training iteration that just finished, thus we start
             # at the next iteration (or iter zero if there's no checkpoint).
         if isinstance(self.model, DistributedDataParallel):
