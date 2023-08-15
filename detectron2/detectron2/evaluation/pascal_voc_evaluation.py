@@ -112,6 +112,7 @@ class PascalVOCDetectionEvaluator(DatasetEvaluator):
         ret = OrderedDict()
         mAP = {iou: np.mean(x) for iou, x in aps.items()}
         ret["bbox"] = {"AP": np.mean(list(mAP.values())), "AP50": mAP[50], "AP75": mAP[75]}
+        print(aps[50])
         return ret
 
 

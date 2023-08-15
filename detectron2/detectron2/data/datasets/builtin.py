@@ -275,7 +275,24 @@ def register_all_pascal_voc(root):
         ("cityscapes_voc_car_trainval", "cityscapes_voc/VOC2007", "source_trainval"),
         ("cityscapes_voc_car_test", "cityscapes_voc/VOC2007", "test"),
         ("kitti_voc_car_train", "kitti/VOC2007", "train"),
-        ("sim10k_voc_car_train", "sim10k_coco/VOC2012", "train"),
+        ("sim10k_voc_car_train", "sim10k/VOC2012", "train"),
+    ]
+    BddClassSPLITS = [
+        ("cityscapes_voc_bdd_trainval", "cityscapes_voc/VOC2007", "source_trainval"),
+        ("cityscapes_voc_bdd_test", "cityscapes_voc/VOC2007", "test"),
+        ("bdd_voc_train", "bdd/VOC2007", "train"),
+        ("bdd_voc_test", "bdd/VOC2007", "val"),
+    ]
+    PascalSPLITS = [    
+        ("pascal_voc_trainval", "pascal_voc/VOC", "trainval"),
+        ("clipart_voc_trainval", "clipart_voc", "train"),
+    ]
+    Pascal6ClassSPLITS = [
+        ("pascal_voc_6class_trainval", "pascal_voc/VOC", "trainval"),
+        ("comic_voc_train", "comic_voc", "train"),
+        ("comic_voc_test", "comic_voc", "test"),
+        ("watercolor_voc_train", "watercolor_voc", "train"),
+        ("watercolor_voc_test", "watercolor_voc", "test"),
     ]
     for name, dirname, split in SPLITS:
         year = 2007 if "2007" in name else 2012
@@ -284,6 +301,18 @@ def register_all_pascal_voc(root):
     for name, dirname, split in SingleClassSPLITS:
         year = 2007 if "2007" in name else 2012
         register_pascal_voc(name, os.path.join(root, dirname), split, year, class_names=('car',))
+        MetadataCatalog.get(name).evaluator_type = "pascal_voc"
+    for name, dirname, split in BddClassSPLITS:
+        year = 2007 if "2007" in name else 2012
+        register_pascal_voc(name, os.path.join(root, dirname), split, year, class_names=('person', 'rider', 'car', 'truck', 'bus', 'motorcycle', 'bicycle',))
+        MetadataCatalog.get(name).evaluator_type = "pascal_voc"
+    for name, dirname, split in PascalSPLITS:
+        year = 2007 if "2007" in name else 2012
+        register_pascal_voc(name, os.path.join(root, dirname), split, year, class_names=("aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat","chair", "cow", "diningtable", "dog", "horse", "motorbike", "person","pottedplant", "sheep", "sofa", "train", "tvmonitor",)) 
+        MetadataCatalog.get(name).evaluator_type = "pascal_voc"
+    for name, dirname, split in Pascal6ClassSPLITS:
+        year = 2007 if "2007" in name else 2012
+        register_pascal_voc(name, os.path.join(root, dirname), split, year, class_names=('bicycle', 'bird', 'car', 'cat', 'dog', 'person',))   #bike, bird, car, cat, dog, person
         MetadataCatalog.get(name).evaluator_type = "pascal_voc"
 
 

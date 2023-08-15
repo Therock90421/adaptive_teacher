@@ -107,8 +107,8 @@ class DAobjTwoStagePseudoLabGeneralizedRCNN(GeneralizedRCNN):
         # self.D_img = None
         self.D_img = FCDiscriminator_img(self.backbone._out_feature_channels[self.dis_type]) # Need to know the channel
         ############################## Multi discriminator
-        self.D_img_vgg2 = FCDiscriminator_img(self.backbone._out_feature_channels['vgg2']) # Need to know the channel
-        self.D_img_vgg3 = FCDiscriminator_img(self.backbone._out_feature_channels['vgg3']) # Need to know the channel
+        #self.D_img_vgg2 = FCDiscriminator_img(self.backbone._out_feature_channels['vgg2']) # Need to know the channel
+        #self.D_img_vgg3 = FCDiscriminator_img(self.backbone._out_feature_channels['vgg3']) # Need to know the channel
 
         # self.bceLoss_func = nn.BCEWithLogitsLoss()
     def build_discriminator(self):
@@ -201,20 +201,20 @@ class DAobjTwoStagePseudoLabGeneralizedRCNN(GeneralizedRCNN):
             loss_D_img_t = F.binary_cross_entropy_with_logits(D_img_out_t, torch.FloatTensor(D_img_out_t.data.size()).fill_(target_label).to(self.device))
 
             ############################## Multi discriminator
-            features_s_vgg2 = grad_reverse(features['vgg2'])
-            D_img_out_s_vgg2 = self.D_img_vgg2(features_s_vgg2)
-            loss_D_img_s_vgg2 = F.binary_cross_entropy_with_logits(D_img_out_s_vgg2, torch.FloatTensor(D_img_out_s_vgg2.data.size()).fill_(source_label).to(self.device))
-            features_s_vgg3 = grad_reverse(features['vgg3'])
-            D_img_out_s_vgg3 = self.D_img_vgg3(features_s_vgg3)
-            loss_D_img_s_vgg3 = F.binary_cross_entropy_with_logits(D_img_out_s_vgg3, torch.FloatTensor(D_img_out_s_vgg3.data.size()).fill_(source_label).to(self.device))
+            #features_s_vgg2 = grad_reverse(features['vgg2'])
+            #D_img_out_s_vgg2 = self.D_img_vgg2(features_s_vgg2)
+            #loss_D_img_s_vgg2 = F.binary_cross_entropy_with_logits(D_img_out_s_vgg2, torch.FloatTensor(D_img_out_s_vgg2.data.size()).fill_(source_label).to(self.device))
+            #features_s_vgg3 = grad_reverse(features['vgg3'])
+            #D_img_out_s_vgg3 = self.D_img_vgg3(features_s_vgg3)
+            #loss_D_img_s_vgg3 = F.binary_cross_entropy_with_logits(D_img_out_s_vgg3, torch.FloatTensor(D_img_out_s_vgg3.data.size()).fill_(source_label).to(self.device))
 
             
-            features_t_vgg2 = grad_reverse(features_t['vgg2'])
-            D_img_out_t_vgg2 = self.D_img_vgg2(features_t_vgg2)
-            loss_D_img_t_vgg2 = F.binary_cross_entropy_with_logits(D_img_out_t_vgg2, torch.FloatTensor(D_img_out_t_vgg2.data.size()).fill_(target_label).to(self.device))
-            features_t_vgg3 = grad_reverse(features_t['vgg3'])
-            D_img_out_t_vgg3 = self.D_img_vgg3(features_t_vgg3)
-            loss_D_img_t_vgg3 = F.binary_cross_entropy_with_logits(D_img_out_t_vgg3, torch.FloatTensor(D_img_out_t_vgg3.data.size()).fill_(target_label).to(self.device))
+            #features_t_vgg2 = grad_reverse(features_t['vgg2'])
+            #D_img_out_t_vgg2 = self.D_img_vgg2(features_t_vgg2)
+            #loss_D_img_t_vgg2 = F.binary_cross_entropy_with_logits(D_img_out_t_vgg2, torch.FloatTensor(D_img_out_t_vgg2.data.size()).fill_(target_label).to(self.device))
+            #features_t_vgg3 = grad_reverse(features_t['vgg3'])
+            #D_img_out_t_vgg3 = self.D_img_vgg3(features_t_vgg3)
+            #loss_D_img_t_vgg3 = F.binary_cross_entropy_with_logits(D_img_out_t_vgg3, torch.FloatTensor(D_img_out_t_vgg3.data.size()).fill_(target_label).to(self.device))
 
             # import pdb
             # pdb.set_trace()
